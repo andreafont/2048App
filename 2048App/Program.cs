@@ -10,6 +10,8 @@ namespace _2048App
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("hello world");
+            Console.ReadLine();
         }
     }
 }
