@@ -15,33 +15,39 @@ namespace _2048App
         {
             int[,] tableVise = // initiation de la grille de jeu
             {
-                {0,3,5,0},
                 {0,0,0,0},
-                {0,0,7,0},
-                {0,5,0,0},
+                {0,0,0,0},
+                {0,0,0,0},
+                {0,0,0,0},
             };
-            int tableColumn = tableVise.GetLength(0);
-            int tableLine = tableVise.GetLength(0);
+            
             bool endGame = false;
             ConsoleKeyInfo consoleKey;
+            initTable(tableVise);
+            
             while (endGame == false) // évite de sortir du programme
             {
+                printTable(tableVise);
                 consoleKey = Console.ReadKey();
                 switch(consoleKey.Key)
-                {
+                {   
                     case ConsoleKey.UpArrow :
+                        Console.WriteLine();
                         upTable(tableVise);
                         newNbr(tableVise);
                         break;
                     case ConsoleKey.DownArrow:
+                        Console.WriteLine();
                         downTable(tableVise);
                         newNbr(tableVise);
                         break;
                     case ConsoleKey.LeftArrow:
+                        Console.WriteLine();
                         leftTable(tableVise);
                         newNbr(tableVise);
                         break;
                     case ConsoleKey.RightArrow:
+                        Console.WriteLine();
                         rightTable(tableVise);
                         newNbr(tableVise);
                         break;
@@ -50,14 +56,6 @@ namespace _2048App
                         endGame = true;
                         break;
 
-                }
-                for (int i = 0; i < tableColumn; i++) // permet d'afficher le tableau
-                {
-                    for (int j = 0; j < tableLine; j++)
-                    {
-                        Console.Write(tableVise[i, j] + " | ");
-                    }
-                    Console.WriteLine();
                 }
             }
             Console.ReadLine();
@@ -180,7 +178,29 @@ namespace _2048App
                 tableWork[row, col] = random.Next(0, 10) == 0 ? 4 : 2;
             }
         }
-
+        static void initTable(int[,] tableWork)
+        {
+            Random random = new Random();
+            for(int i = 0; i < 2; i++) // génère 2 nombres aléatoire soit 2 soit 4  
+            {
+             int ligne = random.Next(0, 4);
+             int colonne = random.Next(0, 4);       
+             tableWork[ligne, colonne] = random.Next(0,10) == 0 ? 4 : 2; // probabilité de 2% pour le 4              
+            }
+        }
+        static void printTable(int[,] tableWork)
+        {
+            int tableColumn = tableWork.GetLength(0);
+            int tableLine = tableWork.GetLength(0);
+            for (int i = 0; i < tableColumn; i++) // permet d'afficher le tableau
+            {
+                for (int j = 0; j < tableLine; j++)
+                {
+                    Console.Write(tableWork[i, j] + " | ");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
 
